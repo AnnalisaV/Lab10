@@ -14,17 +14,14 @@ public class Simulator {
 	private PriorityQueue<Event> queue= new PriorityQueue<>(); 
 	
 	//parametri di simulazione
-	                                         //tra 1 e 10 min
-	private Duration TIMEIN=Duration.of((long)Math.random()*10+1, ChronoUnit.MINUTES); /*frequenza arrivo gruppi di clienti*/
+	                                        
 	private int tavDaDieci=2; /*numero tavoli con 10 posti a sedere*/
 	private int tavDaOtto=4;
 	private int tavDaSei=4;
 	private int tavDaQuattro=5;
 	private double tolleranza=0.7; 
 	//li faccio impostare dall'esterno 
-	public void setTIMEIN(Duration tIMEIN) {
-		TIMEIN = tIMEIN;
-	}
+	
 	public void setTavDaDieci(int tavDaDieci) {
 		this.tavDaDieci = tavDaDieci;
 	}
@@ -80,7 +77,10 @@ public class Simulator {
 		do {
 			Event e= new Event(oraArrivoGruppo,EventType.ARRIVO_GRUPPO_CLIENTI); 
 			queue.add(e); 
-			oraArrivoGruppo= oraArrivoGruppo.plus(this.TIMEIN); //aggiorno con la frequenza impostata sopra
+			
+			 /*frequenza arrivo gruppi di clienti*/           //tra 1 e 10 min
+			Duration TIMEIN=Duration.of((long)(Math.random()*10)+1, ChronoUnit.MINUTES);
+			oraArrivoGruppo= oraArrivoGruppo.plus(TIMEIN); //aggiorno con la frequenza impostata sopra
 			i++; 
 		}while(i<=2000 && oraArrivoGruppo.isBefore(oraChiusura)); 
 		
@@ -179,7 +179,7 @@ public class Simulator {
 						insoddisfatti++; 
 					}
 				}
-				
+				break; 
 			}
 			
 			if(numPersone<=6) {
@@ -219,7 +219,7 @@ public class Simulator {
 						insoddisfatti++; 
 					}
 				}
-				
+				break; 
 			}
 			
 			if(numPersone<=8) {
@@ -253,6 +253,7 @@ public class Simulator {
 					}
 				}
 				
+				break; 
 				
 			}
 			
