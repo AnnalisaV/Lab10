@@ -82,7 +82,7 @@ public class Simulator {
 			queue.add(e); 
 			oraArrivoGruppo= oraArrivoGruppo.plus(this.TIMEIN); //aggiorno con la frequenza impostata sopra
 			i++; 
-		}while(i<=2000); 
+		}while(i<=2000 && oraArrivoGruppo.isBefore(oraChiusura)); 
 		
 	}
 	
